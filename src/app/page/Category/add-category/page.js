@@ -12,11 +12,16 @@ const AddCategoryPage = () => {
   const [categoryName, setCategoryName] = useState("");
   const [categoryImage, setCategoryImage] = useState("");
   const [editingCategory, setEditingCategory] = useState(null);
+  const [categoryId, setCategoryId] = useState(null);
   const router = useRouter();
 
   // Get category ID from URL query parameters (if editing)
-  const queryParams = new URLSearchParams(window.location.search);
-  const categoryId = queryParams.get("id");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const queryParams = new URLSearchParams(window.location.search);
+      setCategoryId(queryParams.get("id"));
+    }
+  }, []);
 
   // Load category data if editing
   useEffect(() => {
